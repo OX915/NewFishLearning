@@ -8,4 +8,4 @@
         $ git status //查看本地修改
         $ git add . 
         $ git commit -m '[feat]:新增首页'//提交修改并注释，详看
-        $ git push origin develop //push 代码
+        $ git push origin develop //push 代码   
