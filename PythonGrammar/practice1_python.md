@@ -48,5 +48,3 @@ else :
 * #!/usr/bin/python
 * print(str * 2)             # 输出字符串两次
 * print(r'hello\nrunoob')     # 在字符串前面添加一个 r，表示原始字符串，不会发生转义
-
-
