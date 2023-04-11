@@ -26,7 +26,7 @@ class VectorOp(object):
     # 首先将两个向量各个位置的元素打包zip到一起，得到[(x1,y1),(x2,y2),(x3,y3)]
     # 然后用map函数计算[x1*y1,x2*y2,x3*y3]
     # 得到的仍是一个向量list表（求两个向量对应位置相乘类似）
-    # map函数进行就是map(f(),args)就是将参数给f（）进行计算
+    # map函数进行就是map(f(),args)就是将参数给f（）进行计算 map的作用是进行迭代每个位置元素进行相应的操作
     return list(map(lambda x_y:x_y[0]*x_y[1],zip(x,y)))
   
   @staticmethod
@@ -49,24 +49,25 @@ class Perceptron(object):
     '''
     初始化感知器，设置输入参数(x个数)的个数，激活函数
     激活函数的类型为double
+    需要最后得到权重向量和偏置值
     '''
+    # 权重向量初始化为0（input_num个元素的数组）
+    self.weights = [0.0]*input_num
     # 激活函数
     self.activator =activator
-    # 权重向量初始化为0
-    self.weights = [0.0]*input_num
     # 偏置初始化为0
     self.bias = 0.0
   
   def __str__(self):
     '''
-    打印学习到的权重、偏置项
+    打印学习到的权重、偏置项（运行完类，最后返回的是要得到的字符串，进行输出）
     '''
     return 'weights\t:%s\nbias\t:%f\n' % (self.weights,self.bias)
   def predict(self,input_vec):
     '''
     输入向量，输出感知器的激活函数计算结果
     '''
-    # 原理式子：x1*w1+x2*w2+b_0
+    # 原理式子：x1*w1+x2*w2+b_0 结果和0进行比较
     return self.activator(VectorOp.dot(input_vec,self.weights)+self.bias)
   
   def train(self,input_vecs,labels,iteration,rate):
@@ -92,42 +93,43 @@ class Perceptron(object):
   
   def _update_weights(self,input_vec,output,label,rate):
     '''
-    按照感知器规则更新权重（难点）
+    按照感知器规则更新权重和偏置值（难点）
     '''
     # 计算本次的delta
     # 把input_vec[x1,x2,x3,...]向量中的每个值乘上delta，得到每个权重 
     # 最后把权重更新按元素加到原来的weights[w1,w2,w3,...]
-    delta = label - output
+    delta = label - output # 样本和输出的差值 
+    # 更新权重 将样本和实际输出的差值乘以学习率，再与每次输入的值相乘，加到权重上（为啥这么写呢？？先学后边的）
     self.weights = VectorOp.element_add(self.weights,VectorOp.scala_multiply(input_vec,rate*delta))
-    # 更新bias
+    # 更新bias=学习率乘以（样本和输出的差值）
     self.bias += rate*delta
   
 def f(x):
   '''定义激活函数'''
   return 1 if x > 0 else 0
   
-def get_training_dataset():
+def get_and_training_dataset():
   '''基于and真值表构建训练数据'''
   # 构建训练数据
   # 输入向量列表
   input_vecs = [[0,0],[0,1],[1,0],[1,1]]
-  # 期望输出列表 【0，0，0，1】，label为已知样本结果
+  # 期望输出列表 【0，0，0，1】，labels为已知样本结果
   labels = [0,0,0,1]
   return input_vecs,labels
 
 def train_and_perceptron():
-  '''使用and真值表训练感知器'''
+  '''使用and真值表训练感知器（这里返回的是一个类）'''
   # 创建感知器，输入参数为2（and是二元函数），激活函数为f
   p = Perceptron(2,f)
   # 训练，迭代10轮，学习速率为0.1
-  input_vecs,labels = get_training_dataset()
+  input_vecs,labels = get_and_training_dataset()
   p.train(input_vecs,labels,10,0.1)
   return p
 
 if __name__=='__main__':
   # 训练and感知器
   and_perceptron = train_and_perceptron()
-  # 打印训练获得的权重
+  # 打印训练获得的权重 (ps:实际打印的是Percetron的__str__)
   print(and_perceptron)
   # test
   print('0 and 0 = %d' % and_perceptron.predict([0,0]))
