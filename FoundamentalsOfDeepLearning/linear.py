@@ -38,7 +38,7 @@ def plot(linear_unit):
   weights = linear_unit.weights
   bias = linear_unit.bias
   x = range(0,12,1)
-  y = list(map(lambda x : weights[0]*x+bias,x))
+  y = list(map(lambda x : weights[0]*x+bias,x))# 因为此次是一个权重参数（年） 所以取weights[0]
   ax.plot(x,y)
   plt.show()
 
