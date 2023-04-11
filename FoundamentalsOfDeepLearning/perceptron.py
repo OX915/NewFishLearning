@@ -100,6 +100,7 @@ class Perceptron(object):
     # 最后把权重更新按元素加到原来的weights[w1,w2,w3,...]
     delta = label - output # 样本和输出的差值 
     # 更新权重 将样本和实际输出的差值乘以学习率，再与每次输入的值相乘，加到权重上（为啥这么写呢？？先学后边的）
+    # ps：解答 第二章线性单元和梯度讲了运用求梯度下降最大的式子求权重参数[详看第二章式子3]
     self.weights = VectorOp.element_add(self.weights,VectorOp.scala_multiply(input_vec,rate*delta))
     # 更新bias=学习率乘以（样本和输出的差值）
     self.bias += rate*delta
