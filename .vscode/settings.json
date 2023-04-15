@@ -2,5 +2,6 @@
   "python.analysis.typeCheckingMode": "basic",
   "python.analysis.extraPaths": [
     "./FoundamentalsOfDeepLearning/1Perceptron"
-  ]
+  ],
+  "python.linting.pylintArgs": [ "--disable=C,R,W" ]
 }
