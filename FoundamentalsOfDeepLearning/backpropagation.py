@@ -86,9 +86,9 @@ class ConstNode(object):
   def __str__(self):
     '''打印节点信息'''
     node_str = '%u-%u: output: 1 delta:%f' % (self.layer_index,self.node_index,self.delta)
-    downstream_str = reduce(lambda ret,conn:ret+'\n\t'+str(conn),self.downstream,'')
-    return node_str + '\n\tdownstream:' + downstream_str
-  
+    dowmstream_str = reduce(lambda ret,conn:ret+'\n\t'+str(conn),self.downstream,'')
+    upstream_str = reduce(lambda ret,conn:ret+'\n\t'+str(conn),self.upstream,'') 
+    return node_str + '\n\tdownstream:' + dowmstream_str +'\n\tupstream:' + upstream_str 
   
   
   
