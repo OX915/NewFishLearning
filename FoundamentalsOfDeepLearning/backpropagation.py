@@ -238,7 +238,7 @@ class Network(object):
         for conn in node.downstream:
           conn.calc_gradient()
   
-  def get_gradient(self,label,sample):
+  def get_gradient(self,sample,label):
     '''
     获得网络在一个样本下，每个连接上的梯度
     label：样本标签
