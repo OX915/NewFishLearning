@@ -74,14 +74,14 @@ class LabelLoader(Loader):
   
 def get_training_data_set():
   '''获得新联数据集'''
-  image_loader = ImageLoader('../minist/train-images-idx3-ubyte',60000)
-  label_loader = LabelLoader('../minist/train-labels-idx1-ubyte',60000)
+  image_loader = ImageLoader('../minist/train-images-idx3-ubyte.gz',60000)
+  label_loader = LabelLoader('../minist/train-labels-idx1-ubyte.gz',60000)
   return image_loader.load(),label_loader.load()
 
 def get_test_data_set():
   '''获得测试数据集'''  
-  image_loader = ImageLoader('../minist/t10k-images-idx3-ubyte',10000)
-  label_loader = LabelLoader('../minist/t10k-labels-idx1-ubyte',10000)
+  image_loader = ImageLoader('../minist/t10k-images-idx3-ubyte.gz',10000)
+  label_loader = LabelLoader('../minist/t10k-labels-idx1-ubyte.gz',10000)
   return image_loader.load(),label_loader.load() 
 
 def get_result(vec):
