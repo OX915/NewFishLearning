@@ -137,7 +137,7 @@ def gradient_check():
             r1.forward(x[0])
             r1.forward(x[1])
             err1 = error_function(r1.state_list[-1])
-            r1.W[i, j] -= 2 * epsilon
+            r1.W[i, j] -= epsilon
             r1.reset_state()
             r1.forward(x[0])
             r1.forward(x[1])
