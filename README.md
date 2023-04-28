@@ -10,3 +10,7 @@
         $ git add . 
         $ git commit -m '[feat]:新增首页'//提交修改并注释，详看
         $ git push origin develop //push 代码   
+
+
+## 深度学习基础笔记写在了手写笔记pdf中，后续也会把内容写到博客中。
+## 博客：https://blog.csdn.net/Oxford1151
